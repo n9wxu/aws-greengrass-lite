@@ -50,16 +50,10 @@ static GglError generate_keys(EVP_PKEY **pkey) {
 static GglError generate_csr(EVP_PKEY *pkey, X509_REQ **req) {
     int ret = 0;
     *req = X509_REQ_new();
-    if (req == NULL) {
+    if (*req == NULL) {
         GGL_LOGE(
             "Failed to create a openssl x509 certificate signing request object"
         );
-        return GGL_ERR_FAILURE;
-    }
-
-    X509_REQ_set_version(*req, 1);
-    if (ret == 0) {
-        GGL_LOGE("x509 csr set version request failed");
         return GGL_ERR_FAILURE;
     }
 
